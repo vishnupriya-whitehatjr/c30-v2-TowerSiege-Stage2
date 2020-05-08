@@ -4,9 +4,9 @@ const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 
 var engine, world;
-var holder,ball,ground;
+var holder,polygon,ground;
 var stand1,stand2;
-var ball;
+var polygon;
 var slingShot;
 var polygon_img;
 function preload(){
@@ -56,11 +56,11 @@ function setup() {
   //top
   blocks9 = new Block(700,95,30,40);
 
-  //ball holder with slings
-  ball = Bodies.circle(50,200,20);
-  World.add(world,ball);
+  //polygon holder with slings
+  polygon = Bodies.circle(50,200,20);
+  World.add(world,polygon);
   
-  slingShot = new Slingshot(this.ball,{x:100,y:200});
+  slingShot = new Slingshot(this.polygon,{x:100,y:200});
 
 }
 function draw() {
@@ -70,7 +70,7 @@ function draw() {
   text(mouseX + ',' + mouseY, 10, 15);
   textSize(20);
   fill("lightyellow");
-  text("Drag the ball to destroy the blocks",300,30);
+  text("Drag the polygon to destroy the blocks",300,30);
   textSize(10);
   text("Press Space to get a second Chance to Play!!",650 ,350);
   ground.display();
@@ -112,19 +112,19 @@ function draw() {
   blocks9.display();
   fill("gold");
   imageMode(CENTER)
-  image(polygon_img ,ball.position.x,ball.position.y,40,40);
+  image(polygon_img ,polygon.position.x,polygon.position.y,40,40);
 
   slingShot.display();
   
 }
 function mouseDragged(){
-  Matter.Body.setPosition(this.ball,{x:mouseX,y:mouseY});
+  Matter.Body.setPosition(this.polygon,{x:mouseX,y:mouseY});
 }
 function mouseReleased(){
   slingShot.fly();
 }
 function keyPressed(){
   if(keyCode === 32){
-      slingShot.attach(this.ball);
+      slingShot.attach(this.polygon);
   }
 }
